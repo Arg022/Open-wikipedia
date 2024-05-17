@@ -128,3 +128,34 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Aggiunte personalizzate per il progetto
+
+# Node.js
+node_modules/
+
+# File di configurazione sensibili
+.env
+
+# File di log
+logs/
+*.log
+
+# Cache e output di build
+.cache/
+build/
+dist/
+out/
+
+# Altri file temporanei o di output
+.temp/
+.next/
+.nuxt/
+
+# File di copertura del codice
+coverage/
+.nyc_output/
+
+# Cartelle specifiche degli strumenti
+.idea/     # IntelliJ IDEA
+.vscode/   # Visual Studio Code
