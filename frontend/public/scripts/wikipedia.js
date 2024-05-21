@@ -1,8 +1,8 @@
 import wikipedia from "wikipedia-js";
-var query = "Italia";
+var query = "Napoleon Bonaparte";
 // if you want to retrieve a full article set summaryOnly to false.
 // Full article retrieval and parsing is still beta
-var options = { query: query, format: "html", summaryOnly: true };
+var options = { query: query, format: "html", summaryOnly: false };
 wikipedia.searchArticle(options, function (err, htmlWikiText) {
     if (err) {
         console.log("An error occurred[query=%s, error=%s]", query, err);
