@@ -23,9 +23,11 @@ validate.validators.userExists = function (value, options, key, attributes) {
 export function createUserValidation(req, res, next) {
     validate
         .async(req.body, {
-            username: {
-                presence: { allowEmpty: false },
-                length: { minimum: 5 },
+            email: {
+                email: true,
+                userExists: {
+                    id: +req.params.id,
+                },
             },
             password: {
                 presence: { allowEmpty: false },
