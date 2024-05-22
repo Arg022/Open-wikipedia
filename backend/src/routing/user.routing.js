@@ -39,17 +39,10 @@ export default function userRouting(app) {
     app.post("/users", createUserValidation, async (req, res) => {
         const newUser = await prisma.user.create({
             data: {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
+                username: req.body.username,
                 password: req.body.password,
-                datanascita: moment(
-                    req.body.datanascita,
-                    "YYYY-MM-DD"
-                ).toISOString(),
             },
         });
-
         res.status(201);
         res.json(newUser);
     });

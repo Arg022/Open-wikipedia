@@ -23,32 +23,15 @@ validate.validators.userExists = function (value, options, key, attributes) {
 export function createUserValidation(req, res, next) {
     validate
         .async(req.body, {
-            firstName: {
+            username: {
                 presence: { allowEmpty: false },
                 length: { minimum: 5 },
-            },
-            lastName: {
-                presence: { allowEmpty: false },
-                length: { minimum: 5 },
-            },
-            email: {
-                email: true,
-                userExists: {
-                    id: +req.params.id,
-                },
             },
             password: {
                 presence: { allowEmpty: false },
             },
             valPassword: {
                 equality: "password",
-            },
-            datanascita: {
-                datetime: {
-                    dateOnly: true,
-                    latest: moment.utc().subtract(18, "years"),
-                    message: "Devi essere maggiorenne",
-                },
             },
         })
         .then(
@@ -64,7 +47,7 @@ export function createUserValidation(req, res, next) {
         );
 }
 
-export function updateUserValidation(req, res, next) {
+/* export function updateUserValidation(req, res, next) {
     validate
         .async(req.body, {
             firstName: {
@@ -106,4 +89,4 @@ export function updateUserValidation(req, res, next) {
                 res.json({ isError: true, error: errors });
             }
         );
-}
+} */

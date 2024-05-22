@@ -4,19 +4,24 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-datasource mysql {
-  provider = "mysql"
-  url      = env("DATABASE_URL_MYSQL")
-}
-
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL_MONGODB")
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  password String
+}
+
 model Article {
-  id        Int      @id @default(autoincrement())
-  title     String   @unique
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  title     String @unique
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
