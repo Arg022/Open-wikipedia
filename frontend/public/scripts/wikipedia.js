@@ -1,4 +1,5 @@
 import wikipedia from "wikipedia-js";
+import  TurndownService  from 'turndown';
 var query = "Napoleon Bonaparte";
 // if you want to retrieve a full article set summaryOnly to false.
 // Full article retrieval and parsing is still beta
@@ -7,12 +8,8 @@ wikipedia.searchArticle(options, function (err, htmlWikiText) {
     if (err) {
         console.log("An error occurred[query=%s, error=%s]", query, err);
         return;
-    }
-    console.log(
-        "Query successful[query=%s, html-formatted-wiki-text=%s]",
-        query,
-        htmlWikiText
-    );
+    }  const htmlText = htmlWikiText
+    
     /*You should see something along the lines of:
     <p><strong>Napoleon Bonaparte</strong> (French: Napoléon Bonaparte [napoleɔ̃ bɔnɑpaʁt], Italian: Napoleone Buonaparte; 15 August 1769&nbsp;– 5 May 1821) was a French military and political leader who rose to prominence during the latter stages of the <a href=http://en.wikipedia.org/French_Revolution">French Revolution</a> and its associated <a href=http://en.wikipedia.org/French_Revolutionary_Wars">wars</a> in Europe.</p>
     <p>As <strong>Napoleon I</strong>, he was <a href=http://en.wikipedia.org/Emperor_of_the_French">Emperor of the French</a> from 1804 to 1815. His legal reform, the <a href=http://en.wikipedia.org/Napoleonic_Code">Napoleonic Code</a>, has been a major influence on many <a href=http://en.wikipedia.org/Civil_law_(legal_system)">civil law</a> jurisdictions worldwide, but he is best remembered for his role in the wars led against France by a series of coalitions, the so-called <a href=http://en.wikipedia.org/Napoleonic_Wars">Napoleonic Wars</a>. He established hegemony over most of continental Europe and sought to spread the ideals of the French Revolution, while consolidating an <a href=http://en.wikipedia.org/First_French_Empire">imperial monarchy</a> which restored aspects of the deposed <em><a href=http://en.wikipedia.org/Ancien_Régime">Ancien Régime</a>.</em> Due to his success in these wars, often against numerically superior enemies, he is generally regarded as one of the greatest military commanders of all time, and his campaigns are studied at military academies worldwide.(ref: Schom 1998)</p>
@@ -21,3 +18,12 @@ wikipedia.searchArticle(options, function (err, htmlWikiText) {
     <p>The <a href=http://en.wikipedia.org/Peninsular_War">Peninsular War</a> and 1812 <a href=http://en.wikipedia.org/French_invasion_of_Russia">French invasion of Russia</a> marked turning points in Napoleons fortunes. His <a href=http://en.wikipedia.org/Grande_Armée">Grande Armée</a> was badly damaged in the campaign and never fully recovered. In 1813, the <a href=http://en.wikipedia.org/Sixth_Coalition">Sixth Coalition</a> defeated his forces <a href=http://en.wikipedia.org/Battle_of_Leipzig">at Leipzig</a>; the following year the Coalition invaded France, forced Napoleon to abdicate and exiled him to the island of <a href=http://en.wikipedia.org/Elba">Elba</a>. Less than a year later, he escaped Elba and returned to power, but was defeated at the <a href=http://en.wikipedia.org/Battle_of_Waterloo">Battle of Waterloo</a> in June 1815. Napoleon spent the last six years of his life in confinement by the British on the island of <a href=http://en.wikipedia.org/Saint_Helena">Saint Helena</a>. An autopsy concluded he died of <a href=http://en.wikipedia.org/stomach_cancer">stomach cancer</a>, but there has been some debate about the cause of his death, as some scholars have speculated that he was a victim of <a href=http://en.wikipedia.org/arsenic_poisoning">arsenic poisoning</a>.</p>
   */
 });
+
+
+// Crea un'istanza di TurndownService
+const turndownService = new TurndownService();
+// Testo HTML da convertire in Markdown
+// Converte HTML in Markdown
+const markdownText = turndownService.turndown(htmlText);
+
+console.log(markdownText);
