@@ -19,10 +19,10 @@ model User {
   password String
 }
 
-model Article {
+model WikipediaPage {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
-  title     String @unique
-  content   String
+  title     String
+  filePath  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
