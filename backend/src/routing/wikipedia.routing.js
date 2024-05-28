@@ -1,4 +1,7 @@
-import { searchWikipedia, wikipediaToMarkdown } from "../services/wikipedia.service.js";
+import {
+    searchWikipedia,
+    wikipediaToMarkdown,
+} from "../services/wikipedia.service.js";
 import prisma from "../../db/prisma.js";
 import fs from "fs";
 import path from "path";
@@ -12,7 +15,8 @@ export default function wikipediaRouting(app) {
 
         try {
             const markdownContent = await wikipediaToMarkdown(title);
-            const filePath = path.join(__dirname, '../content', `${title}.md`);
+            
+            const filePath = path.join(__dirname, "../content", `${title}.md`);
 
             fs.writeFileSync(filePath, markdownContent, "utf8");
 

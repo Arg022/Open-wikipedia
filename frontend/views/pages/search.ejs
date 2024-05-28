@@ -7,25 +7,10 @@
 </head>
 <body>
     <h1>Search Wikipedia</h1>
-    <form action="/search" method="GET">
+    <form>
         <label for="searchTerm">Search Term:</label>
         <input type="text" id="searchTerm" name="searchTerm">
         <button type="submit">Search</button>
     </form>
-
-    <% if (results && results.length > 0) { %>
-        <h2>Search Results:</h2>
-        <ul>
-            <% results.forEach(result => { %>
-                <li>
-                    <a href="/wiki/<%= encodeURIComponent(result) %>"><%= result %></a>
-                    <form action="/save" method="POST">
-                        <input type="hidden" name="title" value="<%= result %>">
-                        <button type="submit">Save as Markdown</button>
-                    </form>
-                </li>
-            <% }); %>
-        </ul>
-    <% } %>
 </body>
 </html>

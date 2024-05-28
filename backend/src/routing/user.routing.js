@@ -5,7 +5,6 @@ import isLoggedIn from "../middleware/isLoggedIn.js";
 export default function userRouting(app) {
     const DB_PATH = "./db/users.json";
 
-
     // create
     app.post("/users", createUserValidation, async (req, res) => {
         const newUser = await prisma.user.create({
