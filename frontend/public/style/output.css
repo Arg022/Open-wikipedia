@@ -1950,8 +1950,16 @@ html {
   height: 100vh;
 }
 
+.max-h-32 {
+  max-height: 8rem;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-80 {
+  width: 20rem;
 }
 
 .max-w-6xl {
@@ -1960,6 +1968,10 @@ html {
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.max-w-24 {
+  max-width: 6rem;
 }
 
 .flex-col {

@@ -19,7 +19,7 @@
 <body>
     <h1>Markdown Editor</h1>
     <!-- Area per il contenuto Markdown -->
-    <textarea id="markdown-editor"></textarea>
+    <textarea id="markdown-editor" class="max-h-32 max-w-24"></textarea>
 
     <!-- Includi SimpleMDE JavaScript -->
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
@@ -30,29 +30,12 @@
                 const markdownContent = await response.text();
                 document.getElementById('markdown-editor').value = markdownContent;
                 var simplemde = new SimpleMDE({
-                    autofocus: true,
-                    autosave: {
-                        enabled: true,
-                        uniqueId: "id",
-                        delay: 1000,
-                    },
-                    element: document.getElementById("markdown-editor"),
-                    forceSync: true,
-                    hideIcons: ["guide", "heading"],
-                    insertTexts: {
-                        horizontalRule: ["", "\n\n-----\n\n"],
-                        image: ["![](http://", ")"],
-                        link: ["[", "](http://)"],
-                        table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],
-                    },
-                    lineWrapping: true,
-                    tabSize: 4,
+                    element: document.getElementById("markdown-editor")
                 });
             } catch (error) {
                 console.error('Errore nel caricamento di output.md:', error);
             }
         }
-
         loadMarkdown();
     </script>
 </body>
