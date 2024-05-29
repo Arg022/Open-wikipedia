@@ -7,6 +7,15 @@ import fs from "fs";
 import path from "path";
 
 export default function wikipediaRouting(app) {
+    app.post("/search", async (req, res) => {
+        const searchTerm = req.query.q;
+        if (!searchTerm) {
+            res.render("index", { results: [], searchTerm: "" });
+        }
+        const results = await searchWikipedia(searchTerm);
+        res.render("index", { results, searchTerm });
+    });
+
     app.post("/wikipedia/save-article", async (req, res) => {
         const { title } = req.body;
         if (!title) {
@@ -15,7 +24,7 @@ export default function wikipediaRouting(app) {
 
         try {
             const markdownContent = await wikipediaToMarkdown(title);
-            
+
             const filePath = path.join(__dirname, "../content", `${title}.md`);
 
             fs.writeFileSync(filePath, markdownContent, "utf8");

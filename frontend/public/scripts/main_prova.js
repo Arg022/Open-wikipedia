@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Inizializza SimpleMDE se presente
-    const editorElement = document.getElementById("editor");
-    if (editorElement) {
-        var simplemde = new SimpleMDE({ element: editorElement });
-    }
 
-    // Gestisci la ricerca e il salvataggio degli articoli
     const searchForm = document.querySelector("form[action='/search']");
     if (searchForm) {
         searchForm.addEventListener("submit", async function (event) {
@@ -28,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Funzione per visualizzare i risultati della ricerca
     function displaySearchResults(results) {
         const resultsContainer = document.querySelector("#search-results");
         if (resultsContainer) {
