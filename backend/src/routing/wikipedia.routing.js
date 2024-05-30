@@ -4,16 +4,21 @@ import {
 } from "../services/wikipedia.service.js";
 import prisma from "../../db/prisma.js";
 import fs from "fs";
-import path from "path";
+
 
 export default function wikipediaRouting(app) {
     app.post("/search", async (req, res) => {
-        const searchTerm = req.query.q;
+        const searchTerm = req.body.query;
         if (!searchTerm) {
-            res.render("index", { results: [], searchTerm: "" });
+            return res.status(400).json({ error: "Query is required" });
         }
-        const results = await searchWikipedia(searchTerm);
-        res.render("index", { results, searchTerm });
+        try {
+            const results = await searchWikipedia(searchTerm);
+            res.json(results);
+        } catch (error) {
+            console.error("Error searching Wikipedia:", error);
+            res.status(500).json({ error: "Failed to search Wikipedia" });
+        }
     });
 
     app.post("/wikipedia/save-article", async (req, res) => {

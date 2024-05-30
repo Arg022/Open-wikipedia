@@ -1,42 +1,75 @@
-document.addEventListener("DOMContentLoaded", function () {
+document
+    .getElementById("search-form")
+    .addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const query = document.getElementById("query").value;
 
-    const searchForm = document.querySelector("form[action='/search']");
-    if (searchForm) {
-        searchForm.addEventListener("submit", async function (event) {
-            event.preventDefault();
-            const formData = new FormData(searchForm);
-            const query = formData.get("query");
-            try {
-                const response = await fetch("/search", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ query }),
-                });
-                const results = await response.json();
-                displaySearchResults(results);
-            } catch (error) {
-                console.error("Error searching Wikipedia:", error);
+        try {
+            const response = await fetch("http://localhost:8000/search", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ q: query }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Error searching Wikipedia");
             }
-        });
+
+            const data = await response.json();
+            displayResults(data);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    });
+
+function displayResults(results) {
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = "";
+
+    if (results.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found</p>";
+        return;
     }
 
-    function displaySearchResults(results) {
-        const resultsContainer = document.querySelector("#search-results");
-        if (resultsContainer) {
-            resultsContainer.innerHTML = results
-                .map(
-                    (result) => `
-                        <li>
-                            ${result.title}
-                            <form action="/save-article" method="POST" class="inline">
-                                <input type="hidden" name="title" value="${result.title}">
-                                <button type="submit" class="bg-green-500 text-white px-2 py-1">Save</button>
-                            </form>
-                        </li>`
-                )
-                .join("");
+    const list = document.createElement("ul");
+    results.forEach((result) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = result;
+
+        const saveButton = document.createElement("button");
+        saveButton.textContent = "Save";
+        saveButton.onclick = () => saveArticle(result);
+
+        listItem.appendChild(saveButton);
+        list.appendChild(listItem);
+    });
+
+    resultsContainer.appendChild(list);
+}
+
+async function saveArticle(title) {
+    try {
+        const response = await fetch(
+            "http://localhost:8000/wikipedia/save-article",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title }),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Error saving article");
         }
+
+        const data = await response.json();
+        alert(`Article "${data.title}" saved successfully!`);
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to save the article");
     }
-});
+}

@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import TurndownService from "turndown";
 
 const turndownService = new TurndownService();
+turndownService.remove("style");
 
 export async function searchWikipedia(searchTerm) {
     const response = await fetch(
