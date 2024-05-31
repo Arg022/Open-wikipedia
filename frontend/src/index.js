@@ -28,7 +28,7 @@ app.post("/search", async (req, res) => {
 app.post("/save-article", async (req, res) => {
     const { title } = req.body;
     try {
-        await axios.post("http://localhost:8000/wikipedia/save-article", {
+        await fetch("http://localhost:8000/wikipedia/save-article", {
             title,
         });
         res.redirect("/articles");
@@ -40,12 +40,12 @@ app.post("/save-article", async (req, res) => {
 // View saved articles
 app.get("/articles", async (req, res) => {
     try {
-        const response = await axios.get(
-            "http://localhost:8000/wikipedia/articles"
-        );
-        res.render("pages/articles", { articles: response.data });
+        const response = await fetch("http://localhost:8000/wikipedia/articles");
+        const articles = await response.json();
+        res.render("pages/articles", { articles });
     } catch (error) {
-        res.status(500).send("Error fetching articles");
+        console.error("Failed to fetch articles:", error);
+        res.render("pages/articles", { articles: [] });
     }
 });
 
@@ -53,7 +53,7 @@ app.get("/articles", async (req, res) => {
 app.get("/edit/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        const response = await axios.get(
+        const response = await fetch(
             `http://localhost:8000/wikipedia/articles/${id}`
         );
         res.render("pages/edit", { article: response.data });
@@ -66,7 +66,7 @@ app.post("/edit/:id", async (req, res) => {
     const { id } = req.params;
     const { content } = req.body;
     try {
-        await axios.put(`http://localhost:8000/wikipedia/articles/${id}`, {
+        await fetch(`http://localhost:8000/wikipedia/articles/${id}`, {
             content,
         });
         res.redirect("/articles");

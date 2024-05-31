@@ -21,9 +21,10 @@ model User {
 }
 
 model WikipediaPage {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   filePath  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  link      String    
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

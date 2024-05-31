@@ -34,13 +34,20 @@ export default function wikipediaRouting(app) {
         try {
             const markdownContent = await wikipediaToMarkdown(title);
 
+            const response = await fetch(
+                `https://it.wikipedia.org/w/api.php?action=parse&page=${title}&format=json`
+            );
+            const data = await response.json();
+            const wikiLink = data.parse.pageid ? `https://it.wikipedia.org/wiki/${encodeURIComponent(title)}` : null;
+
             const filePath = path.join(__dirname, "../content", `${title}.md`);
             fs.writeFileSync(filePath, markdownContent, "utf8");
 
             const newPage = await prisma.wikipediaPage.create({
                 data: {
                     title: title,
-                    filePath: filePath
+                    filePath: filePath,
+                    link: wikiLink // Salva il link nel database
                 },
             });
 
@@ -48,6 +55,15 @@ export default function wikipediaRouting(app) {
         } catch (error) {
             console.error("Failed to save article to the database:", error);
             res.status(500).json({ error: "Failed to save article" });
+        }
+    });
+
+    app.get("/articles", async (req, res) => {
+        try {
+            const articles = await prisma.wikipediaPage.findMany();
+            res.status(200).json(articles);
+        } catch (error) {
+            res.status(500).json({ error: "Failed to fetch articles" });
         }
     });
 }
