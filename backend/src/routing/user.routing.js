@@ -1,35 +1,30 @@
-import { createUserValidation } from "../validations/users.validations.js";
 import prisma from "../../db/prisma.js";
 import isLoggedIn from "../middleware/isLoggedIn.js";
 
 export default function userRouting(app) {
-    const DB_PATH = "./db/users.json";
-
-    // create
-    app.post("/users", createUserValidation, async (req, res) => {
-        const newUser = await prisma.user.create({
-            data: {
-                email: req.body.email,
-                password: req.body.password,
-            },
-        });
-        res.status(201);
-        res.json(newUser);
+    // Create user
+    app.post("/users", async (req, res) => {
+        try {
+            const newUser = await prisma.user.create({
+                data: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password,
+                },
+            });
+            res.status(201).json(newUser);
+        } catch (error) {
+            res.status(500).json({ error: "Failed to create user" });
+        }
     });
 
-    // delete
-    app.delete("/users/:id", async (req, res) => {
-        const userId = +req.params.id;
-        let user = await prisma.user.findUnique({
-            where: { id: userId },
-        });
-        if (user) {
-            await prisma.user.delete({
-                where: { id: userId },
-            });
-            res.json(user);
-        } else {
-            res.status(404).json({ message: "User not found" });
+    // Get all users (only if you are logged)
+    app.get("/users", isLoggedIn, async (req, res) => {
+        try {
+            const users = await prisma.user.findMany();
+            res.status(200).json(users);
+        } catch (error) {
+            res.status(500).json({ error: "Failed to fetch users" });
         }
     });
 }

@@ -5,12 +5,13 @@ import {
 import prisma from "../../db/prisma.js";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from 'url'; // Importa fileURLToPath e url
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url); // Ottieni il nome del file corrente
 const __dirname = path.dirname(__filename); // Ottieni la directory del file corrente
 
 export default function wikipediaRouting(app) {
+    // search a word or a sentence on wikipedia
     app.post("/search", async (req, res) => {
         const searchTerm = req.body.q;
         if (!searchTerm) {
@@ -25,6 +26,7 @@ export default function wikipediaRouting(app) {
         }
     });
 
+    //save an articles
     app.post("/wikipedia/save-article", async (req, res) => {
         const { title } = req.body;
         if (!title) {
@@ -45,9 +47,9 @@ export default function wikipediaRouting(app) {
 
             const newPage = await prisma.wikipediaPage.create({
                 data: {
-                    title: title,
-                    filePath: filePath,
-                    link: wikiLink // Salva il link nel database
+                    title: title, //save the title of the article
+                    filePath: filePath, //save the path of the file 
+                    link: wikiLink //save link of wiikipedia
                 },
             });
 
@@ -66,4 +68,58 @@ export default function wikipediaRouting(app) {
             res.status(500).json({ error: "Failed to fetch articles" });
         }
     });
+ // Get article details
+    app.get("/articles/:id", async (req, res) => {
+        const { id } = req.params;
+        try {
+            const article = await prisma.wikipediaPage.findUnique({
+                where: { id: id },
+            });
+
+            if (!article) {
+                return res.status(404).json({ error: "Article not found" });
+            }
+
+            const content = fs.readFileSync(article.filePath, "utf8");
+            res.json({ article, content });
+        } catch (error) {
+            res.status(500).json({ error: "Failed to fetch article details" });
+        }
+    });
+
+    // Update an article
+    app.put("/articles/:id", async (req, res) => {
+        const { id } = req.params;
+        const { content } = req.body;
+
+        try {
+            const article = await prisma.wikipediaPage.findUnique({
+                where: { id: id },
+            });
+
+            if (!article) {
+                return res.status(404).json({ error: "Article not found" });
+            }
+
+            fs.writeFileSync(article.filePath, content, "utf8");
+
+            res.status(200).json({ message: "Article updated successfully" });
+        } catch (error) {
+            res.status(500).json({ error: "Failed to update article" });
+        }
+    });
+
+    // Delete an article
+    app.delete("/articles/:id", async (req, res) => {
+        const { id } = req.params;
+        try {
+            const article = await prisma.wikipediaPage.delete({
+                where: { id: id },
+            });
+            res.status(200).json(article);
+        } catch (error) {
+            res.status(500).json({ error: "Failed to delete article" });
+        }
+    });
+
 }

@@ -50,29 +50,9 @@ app.get("/articles", async (req, res) => {
 });
 
 // Edit an article
-app.get("/edit/:id", async (req, res) => {
-    const { id } = req.params;
-    try {
-        const response = await fetch(
-            `http://localhost:8000/wikipedia/articles/${id}`
-        );
-        res.render("pages/edit", { article: response.data });
-    } catch (error) {
-        res.status(500).send("Error fetching article");
-    }
-});
-
-app.post("/edit/:id", async (req, res) => {
-    const { id } = req.params;
-    const { content } = req.body;
-    try {
-        await fetch(`http://localhost:8000/wikipedia/articles/${id}`, {
-            content,
-        });
-        res.redirect("/articles");
-    } catch (error) {
-        res.status(500).send("Error updating article");
-    }
+app.get("/articles/:id/edit", (req, res) => {
+    const articleId = req.params.id;
+    res.render("pages/edit", { id: articleId, title: "Loading..." });
 });
 
 // User list
@@ -88,11 +68,6 @@ app.get("/users/:id", (req, res) => {
 // Login
 app.get("/login", (req, res) => {
     res.render("pages/login");
-});
-
-//Edit document markdown
-app.get("/edit", (req, res) => {
-    res.render("pages/edit");
 });
 
 app.listen(3000, () => {

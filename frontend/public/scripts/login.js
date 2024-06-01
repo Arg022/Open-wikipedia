@@ -1,31 +1,30 @@
-const loginForm = document.querySelector("#loginForm");
 
-loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = e.target.children[0].value;
-    const password = e.target.children[1].value;
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector("#login-form");
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
 
-    const res = await fetch("http://localhost:8000/login", {
-        body: JSON.stringify({
-            email,
-            password,
-        }),
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        try {
+            const response = await fetch("http://localhost:8000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                document.querySelector("#message").innerText = "Login successful!";
+                localStorage.setItem("token", result.token); // Save the token in localStorage
+                window.location.href = "/articles"; // Redirect to the articles page
+            } else {
+                document.querySelector("#message").innerText = result.message;
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
     });
-
-    if (res.status !== 200) {
-        console.log("errore");
-        return;
-    }
-
-    const data = await res.json();
-    console.log(data);
-
-    localStorage.setItem("user", JSON.stringify(data.user));
-    localStorage.setItem("token", data.token);
-
-    window.location.href = "/users";
 });
