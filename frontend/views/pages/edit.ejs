@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/output.css">
     <title>Edit Article</title>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 </head>
 
-<body>
-    <h1>Edit Article: <%= title %>
-    </h1>
+<body class="[&>a]:text-blue-500">
+    <div class="flex flex-row items-center justify-between m-4">
+        <h1>Editing Article</h1>
+        <button id="save-button" class="btn btn-success text-white">Save</button>
+    </div>
     <input type="hidden" id="article-id" value="<%= id %>">
     <textarea id="editor"></textarea>
-    <button id="save-button">Save</button>
 
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script src="/scripts/edit.js"></script>

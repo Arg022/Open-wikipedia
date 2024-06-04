@@ -2,15 +2,16 @@ import {
     searchWikipedia,
     wikipediaToMarkdown,
 } from "../services/wikipedia.service.js";
-import prisma from "../../db/prisma.js"; 
+import prisma from "../../db/prisma.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url); 
-const __dirname = path.dirname(__filename); 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default function wikipediaRouting(app) {
+    // search a word or a sentence on wikipedia
     app.post("/search", async (req, res) => {
         const searchTerm = req.body.q;
         if (!searchTerm) {
@@ -21,70 +22,67 @@ export default function wikipediaRouting(app) {
             const results = await searchWikipedia(searchTerm);
             res.json(results);
         } catch (error) {
-            console.error("Error searching Wikipedia:", error);
             res.status(500).json({ error: "Error searching Wikipedia" });
         }
     });
 
-    app.post("/wikipedia/save-article", async (req, res) => {
-        const { title, overwrite } = req.body;
-        if (!title) {
-            return res.status(400).json({ error: "Title is required" });
+app.post("/wikipedia/save-article", async (req, res) => {
+    const { title, overwrite } = req.body;
+    if (!title) {
+        return res.status(400).json({ error: "Title is required" });
+    }
+
+    try {
+        // Check if the article already exists
+        const existingArticle = await prisma.wikipediaPage.findFirst({
+            where: { title: title },
+        });
+
+        if (existingArticle && !overwrite) {
+            return res.status(400).json({ error: "Article already exists" });
         }
 
-        try {
-            const markdownContent = await wikipediaToMarkdown(title);
+        const markdownContent = await wikipediaToMarkdown(title);
 
-            const response = await fetch(
-                `https://it.wikipedia.org/w/api.php?action=parse&page=${title}&format=json`
-            );
-            const data = await response.json();
-            const wikiLink = data.parse.pageid ? `https://it.wikipedia.org/wiki/${encodeURIComponent(title)}` : null;
+        const response = await fetch(
+            `https://it.wikipedia.org/w/api.php?action=parse&page=${title}&format=json`
+        );
+        const data = await response.json();
+        const wikiLink = data.parse.pageid ? `https://it.wikipedia.org/wiki/${encodeURIComponent(title)}` : null;
 
-            const filePath = path.join(__dirname, "../content", `${title}.md`);
-            if (!fs.existsSync(path.join(__dirname, "../content"))) {
-                fs.mkdirSync(path.join(__dirname, "../content"));
-            }
-            fs.writeFileSync(filePath, markdownContent, "utf8");
+        const filePath = path.join(__dirname, "../content", `${title}.md`);
+        fs.writeFileSync(filePath, markdownContent, "utf8");
 
-            let newPage;
-
-            if (overwrite) {
-                newPage = await prisma.wikipediaPage.update({
-                    where: { title: title },
-                    data: {
-                        title: title,
-                        filePath: filePath,
-                        link: wikiLink
-                    },
-                });
-            } else {
-                newPage = await prisma.wikipediaPage.create({
-                    data: {
-                        title: title,
-                        filePath: filePath,
-                        link: wikiLink
-                    },
-                });
-            }
-
-            res.status(201).json(newPage);
-        } catch (error) {
-            console.error("Failed to save article to the database:", error);
-            res.status(500).json({ error: "Failed to save article" });
+        if (!existingArticle) {
+            const newPage = await prisma.wikipediaPage.create({
+                data: {
+                    title: title,
+                    filePath: filePath,
+                    link: wikiLink
+                },
+            });
+            return res.status(201).json(newPage);
         }
+
+        // Return existing article data if no need to update the database
+        return res.status(200).json(existingArticle);
+    } catch (error) {
+        console.error("Failed to save article to the database:", error);
+        res.status(500).json({ error: "Failed to save article" });
+    }
     });
 
+    // Fetch all articles
     app.get("/articles", async (req, res) => {
         try {
             const articles = await prisma.wikipediaPage.findMany();
             res.status(200).json(articles);
         } catch (error) {
-            console.error("Failed to fetch articles:", error);
             res.status(500).json({ error: "Failed to fetch articles" });
         }
     });
 
+    // Get article details
     app.get("/articles/:id", async (req, res) => {
         const { id } = req.params;
         try {
@@ -99,11 +97,11 @@ export default function wikipediaRouting(app) {
             const content = fs.readFileSync(article.filePath, "utf8");
             res.json({ article, content });
         } catch (error) {
-            console.error("Failed to fetch article details:", error);
             res.status(500).json({ error: "Failed to fetch article details" });
         }
     });
 
+    // Update an article
     app.put("/articles/:id", async (req, res) => {
         const { id } = req.params;
         const { content } = req.body;
@@ -121,11 +119,11 @@ export default function wikipediaRouting(app) {
 
             res.status(200).json({ message: "Article updated successfully" });
         } catch (error) {
-            console.error("Failed to update article:", error);
             res.status(500).json({ error: "Failed to update article" });
         }
     });
 
+    // Delete an article
     app.delete("/articles/:id", async (req, res) => {
         const { id } = req.params;
         try {
@@ -134,7 +132,6 @@ export default function wikipediaRouting(app) {
             });
             res.status(200).json(article);
         } catch (error) {
-            console.error("Failed to delete article:", error);
             res.status(500).json({ error: "Failed to delete article" });
         }
     });

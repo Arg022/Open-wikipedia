@@ -3,24 +3,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch(`http://localhost:8000/articles/${articleId}`);
     const { content } = await response.json();
 
-    const simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+    const simplemde = new SimpleMDE({
+        element: document.getElementById("editor"),
+    });
     simplemde.value(content);
 
-    document.getElementById("save-button").addEventListener("click", async () => {
-        const updatedContent = simplemde.value();
+    document
+        .getElementById("save-button")
+        .addEventListener("click", async () => {
+            const updatedContent = simplemde.value();
 
-        const response = await fetch(`http://localhost:8000/articles/${articleId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ content: updatedContent })
+            const response = await fetch(
+                `http://localhost:8000/articles/${articleId}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ content: updatedContent }),
+                }
+            );
+
+            if (response.ok) {
+                alert("Article saved successfully!");
+            } else {
+                alert("Failed to save article.");
+            }
         });
-
-        if (response.ok) {
-            alert("Article saved successfully!");
-        } else {
-            alert("Failed to save article.");
-        }
-    });
 });
