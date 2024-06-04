@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const fetchArticles = async () => {
         try {
             const response = await fetch("http://localhost:8000/articles");
-
             const articles = await response.json();
             const articlesList = document.querySelector("#articles-list");
 

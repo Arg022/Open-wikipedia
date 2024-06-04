@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const articleId = document.querySelector("#article-id").value;
-    const response = await fetch(`/articles/${articleId}`);
+    const response = await fetch(`http://localhost:8000/articles/${articleId}`);
     const { content } = await response.json();
 
     const simplemde = new SimpleMDE({ element: document.getElementById("editor") });
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("save-button").addEventListener("click", async () => {
         const updatedContent = simplemde.value();
 
-        const response = await fetch(`/articles/${articleId}`, {
+        const response = await fetch(`http://localhost:8000/articles/${articleId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
