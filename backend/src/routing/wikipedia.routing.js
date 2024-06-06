@@ -5,13 +5,14 @@ import {
 import prisma from "../../db/prisma.js";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
+import fetch from "node-fetch";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default function wikipediaRouting(app) {
-    // search a word or a sentence on wikipedia
+    // Search a word or a sentence on Wikipedia
     app.post("/search", async (req, res) => {
         const searchTerm = req.body.q;
         if (!searchTerm) {
@@ -26,50 +27,62 @@ export default function wikipediaRouting(app) {
         }
     });
 
-app.post("/wikipedia/save-article", async (req, res) => {
-    const { title, overwrite } = req.body;
-    if (!title) {
-        return res.status(400).json({ error: "Title is required" });
-    }
-
-    try {
-        // Check if the article already exists
-        const existingArticle = await prisma.wikipediaPage.findFirst({
-            where: { title: title },
-        });
-
-        if (existingArticle && !overwrite) {
-            return res.status(400).json({ error: "Article already exists" });
+    // Save an article
+    app.post("/wikipedia/save-article", async (req, res) => {
+        const { title, overwrite } = req.body;
+        if (!title) {
+            return res.status(400).json({ error: "Title is required" });
         }
 
-        const markdownContent = await wikipediaToMarkdown(title);
-
-        const response = await fetch(
-            `https://it.wikipedia.org/w/api.php?action=parse&page=${title}&format=json`
-        );
-        const data = await response.json();
-        const wikiLink = data.parse.pageid ? `https://it.wikipedia.org/wiki/${encodeURIComponent(title)}` : null;
-
-        const filePath = path.join(__dirname, "../content", `${title}.md`);
-        fs.writeFileSync(filePath, markdownContent, "utf8");
-
-        if (!existingArticle) {
-            const newPage = await prisma.wikipediaPage.create({
-                data: {
-                    title: title,
-                    filePath: filePath,
-                    link: wikiLink
-                },
+        try {
+            // Check if the article already exists
+            const existingArticle = await prisma.wikipediaPage.findFirst({
+                where: { title: title },
             });
-            return res.status(201).json(newPage);
-        }
 
-        // Return existing article data if no need to update the database
-        return res.status(200).json(existingArticle);
-    } catch (error) {
-        console.error("Failed to save article to the database:", error);
-        res.status(500).json({ error: "Failed to save article" });
-    }
+            if (existingArticle && !overwrite) {
+                return res
+                    .status(400)
+                    .json({ error: "Article already exists" });
+            }
+
+            const markdownContent = await wikipediaToMarkdown(title);
+
+            const response = await fetch(
+                `https://it.wikipedia.org/w/api.php?action=parse&page=${title}&format=json`
+            );
+            const data = await response.json();
+            const wikiLink = data.parse
+                ? `https://it.wikipedia.org/wiki/${encodeURIComponent(title)}`
+                : null;
+
+            const filePath = path.join(__dirname, "../content", `${title}.md`);
+            fs.writeFileSync(filePath, markdownContent, "utf8");
+
+            if (!existingArticle) {
+                const newPage = await prisma.wikipediaPage.create({
+                    data: {
+                        title: title,
+                        filePath: filePath,
+                        link: wikiLink,
+                    },
+                });
+                return res.status(201).json(newPage);
+            } else {
+                // Update the existing article
+                const updatedPage = await prisma.wikipediaPage.update({
+                    where: { id: existingArticle.id },
+                    data: {
+                        filePath: filePath,
+                        link: wikiLink,
+                    },
+                });
+                return res.status(200).json(updatedPage);
+            }
+        } catch (error) {
+            console.error("Failed to save article to the database:", error);
+            res.status(500).json({ error: "Failed to save article" });
+        }
     });
 
     // Fetch all articles
@@ -78,6 +91,7 @@ app.post("/wikipedia/save-article", async (req, res) => {
             const articles = await prisma.wikipediaPage.findMany();
             res.status(200).json(articles);
         } catch (error) {
+            console.error("Failed to fetch articles:", error);
             res.status(500).json({ error: "Failed to fetch articles" });
         }
     });

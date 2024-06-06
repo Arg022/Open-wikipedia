@@ -9,16 +9,46 @@
 </head>
 
 <body>
-    <h1 class="justify-center items-center flex flex-col ">Elenco Articoli Salvati</h1>
-    <ul id="articles-list" class="m-4 list-decimal">
-        <% articles.forEach(article=> { %>
-            <li>
-                <h2>
-                    <%= article.title %>
-                </h2>
-            </li>
-            <% }) %>
-    </ul>
+    <h1 class="text-2xl font-bold text-center mb-4">Elenco Articoli Salvati</h1>
+    <div class="overflow-x-auto">
+        <table class="table w-full divide-y divide-gray-200">
+            <thead>
+                <tr class="text-gray-600 bg-gray-100">
+                    <th class="px-4 py-3 text-left">Titolo</th>
+                    <th class="px-4 py-3 text-left">Data Creazione</th>
+                    <th class="px-4 py-3 text-left">Ultima Modifica</th>
+                    <th class="px-4 py-3 text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="articles-list">
+                <% articles.forEach(article=> { %>
+                    <tr>
+                        <td class="px-4 py-3 text-sm font-medium">
+                            <h2>
+                                <%= article.title %>
+                            </h2>
+                        </td>
+                        <td class="px-4 py-3 text-sm font-normal">
+                            <%= new Date(article.createdAt).toLocaleDateString() %>
+                        </td>
+                        <td class="px-4 py-3 text-sm font-normal">
+                            <% if (article.updatedAt) { %>
+                                <%= new Date(article.updatedAt).toLocaleDateString() %>
+                                    <% } else { %>
+                                        -
+                                        <% } %>
+                        </td>
+                        <td class="px-4 py-3 text-sm font-normal text-end">
+                            <a href="/articles/<%= article.id %>/edit" class="btn btn-primary btn-sm mr-2">Edit</a>
+                            <button onclick="deleteArticle('<%= article.id %>')"
+                                class="btn btn-error btn-sm">Delete</button>
+                            <a href="<%= article.link %>" target="_blank" class="btn btn-link btn-sm">View</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
     <script src="/scripts/articles.js"></script>
 </body>
 

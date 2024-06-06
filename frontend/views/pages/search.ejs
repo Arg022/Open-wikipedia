@@ -11,16 +11,31 @@
 <body class="font-sans bg-gray-200">
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-center mb-8">Wikipedia Search</h1>
-        <form id="search-form" class="flex items-center">
+        <form id="search-form" class="flex items-center mb-8">
             <input id="query" type="text" placeholder="Search Wikipedia..."
                 class="rounded-lg p-2 border border-gray-300 focus:outline-none focus:border-blue-500 flex-grow mr-4">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Search</button>
         </form>
 
-        <div id="results" class="mt-8"></div>
+        <div id="results" class="mb-8"></div>
+
+        <h2 class="text-2xl font-bold mb-4">Saved Articles</h2>
+        <div id="articles" class="bg-white p-4 rounded-lg shadow-md">
+            <table class="w-full table-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Title</th>
+                        <th class="px-4 py-2">Link</th>
+                    </tr>
+                </thead>
+                <tbody id="articles-tbody">
+                    
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <dialog id="overwriteModal" class="flex fixed inset-0 bg-gray-500 bg-opacity-75 justify-center items-center modal">
+    <dialog id="overwriteModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center modal">
         <div class="bg-white p-4 rounded-lg shadow-md">
             <h3 class="text-lg font-medium text-center mb-4">Article already exists!</h3>
             <p>The article "<span id="modal-title"></span>" already exists in your saved list. Do you want to overwrite

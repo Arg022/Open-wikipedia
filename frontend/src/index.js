@@ -11,15 +11,26 @@ app.get("/index", (req, res) => {
     res.render("pages/search");
 });
 
-// Search an ariticle
+// Search an article
 app.post("/search", async (req, res) => {
     const { query } = req.body;
     try {
         const response = await fetch("http://localhost:8000/search", {
-            query,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ q: query }),
         });
-        res.render("pages/search", { results: response.data });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        res.render("pages/search", { results: data });
     } catch (error) {
+        console.error("Error searching Wikipedia:", error);
         res.status(500).send("Error searching Wikipedia");
     }
 });
@@ -28,11 +39,21 @@ app.post("/search", async (req, res) => {
 app.post("/save-article", async (req, res) => {
     const { title } = req.body;
     try {
-        await fetch("http://localhost:8000/wikipedia/save-article", {
-            title,
+        const response = await fetch("http://localhost:8000/wikipedia/save-article", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title }),
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         res.redirect("/articles");
     } catch (error) {
+        console.error("Error saving article:", error);
         res.status(500).send("Error saving article");
     }
 });
@@ -40,7 +61,12 @@ app.post("/save-article", async (req, res) => {
 // View saved articles
 app.get("/articles", async (req, res) => {
     try {
-        const response = await fetch("http://localhost:8000/wikipedia/articles");
+        const response = await fetch("http://localhost:8000/articles");
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const articles = await response.json();
         res.render("pages/articles", { articles });
     } catch (error) {
@@ -52,7 +78,7 @@ app.get("/articles", async (req, res) => {
 // Edit an article
 app.get("/articles/:id/edit", (req, res) => {
     const articleId = req.params.id;
-    res.render("pages/edit", { id: articleId, title: "Loading..." });
+    res.render("pages/edit", { articleId: articleId, title: "Loading..." });
 });
 
 // User list

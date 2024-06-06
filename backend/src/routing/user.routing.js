@@ -1,4 +1,4 @@
-import prisma from "../../db/prisma.js";
+ import prisma from "../../db/prisma.js";
 import isLoggedIn from "../middleware/isLoggedIn.js";
 
 export default function userRouting(app) {

@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 </head>
 
-<body class="[&>a]:text-blue-500">
+<body>
     <div class="flex flex-row items-center justify-between m-4">
         <h1>Editing Article</h1>
         <button id="save-button" class="btn btn-success text-white">Save</button>
     </div>
-    <input type="hidden" id="article-id" value="<%= id %>">
+    <input type="hidden" id="article-id" value="<%= articleId %>">
     <textarea id="editor"></textarea>
 
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
