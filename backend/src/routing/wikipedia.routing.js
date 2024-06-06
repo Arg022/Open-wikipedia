@@ -7,13 +7,14 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import fetch from "node-fetch";
+import isLoggedIn from "../middlewares/isLoggedIn.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default function wikipediaRouting(app) {
     // Search a word or a sentence on Wikipedia
-    app.post("/search", async (req, res) => {
+    app.post("/search", isLoggedIn, async (req, res) => {
         const searchTerm = req.body.q;
         if (!searchTerm) {
             return res.status(400).json({ error: "Search term is required" });
@@ -28,7 +29,7 @@ export default function wikipediaRouting(app) {
     });
 
     // Save an article
-    app.post("/wikipedia/save-article", async (req, res) => {
+    app.post("/wikipedia/save-article", isLoggedIn, async (req, res) => {
         const { title, overwrite } = req.body;
         if (!title) {
             return res.status(400).json({ error: "Title is required" });
@@ -86,7 +87,7 @@ export default function wikipediaRouting(app) {
     });
 
     // Fetch all articles
-    app.get("/articles", async (req, res) => {
+    app.get("/articles", isLoggedIn, async (req, res) => {
         try {
             const articles = await prisma.wikipediaPage.findMany();
             res.status(200).json(articles);
@@ -111,6 +112,7 @@ export default function wikipediaRouting(app) {
             const content = fs.readFileSync(article.filePath, "utf8");
             res.json({ article, content });
         } catch (error) {
+            console.error("Failed to fetch article details:", error);
             res.status(500).json({ error: "Failed to fetch article details" });
         }
     });

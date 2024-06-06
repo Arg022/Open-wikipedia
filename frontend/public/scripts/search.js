@@ -7,6 +7,7 @@ document.getElementById("search-form").addEventListener("submit", async (event) 
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
             },
             body: JSON.stringify({ q: query }),
         });
@@ -32,19 +33,19 @@ function displayResults(results) {
     }
 
     const list = document.createElement("ul");
-    list.className = 'list-none space-y-2';
+    list.className = "list-none space-y-2";
 
     results.forEach((result) => {
         const listItem = document.createElement("li");
-        listItem.className = 'flex items-center justify-between';
+        listItem.className = "flex items-center justify-between";
 
         const titleSpan = document.createElement("span");
-        titleSpan.className = 'text-gray-700'; 
+        titleSpan.className = "text-gray-700";
         titleSpan.textContent = result;
 
         const saveButton = document.createElement("button");
         saveButton.textContent = "Save";
-        saveButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded';
+        saveButton.className = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
         saveButton.onclick = () => saveArticle(result);
 
         listItem.appendChild(titleSpan);
@@ -61,6 +62,7 @@ async function saveArticle(title) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
             },
             body: JSON.stringify({ title, overwrite: false }),
         });
@@ -102,6 +104,7 @@ function showModal(title) {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
                 },
                 body: JSON.stringify({ title, overwrite: true }),
             });
@@ -112,7 +115,7 @@ function showModal(title) {
 
             const data = await response.json();
             alert(`Article "${data.title}" saved successfully!`);
-            fetchArticles(); // Fetch and update the articles table
+            fetchArticles();
         } catch (error) {
             console.error("Error:", error);
             alert("Failed to save the article");
@@ -122,7 +125,11 @@ function showModal(title) {
 
 async function fetchArticles() {
     try {
-        const response = await fetch("http://localhost:8000/articles");
+        const response = await fetch("http://localhost:8000/articles", {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        });
         if (!response.ok) {
             throw new Error("Failed to fetch articles");
         }
@@ -154,11 +161,45 @@ function displayArticles(articles) {
         link.className = "text-blue-500 hover:underline";
         linkCell.appendChild(link);
 
+        const actionsCell = document.createElement("td");
+        actionsCell.className = "px-4 py-2 border text-right";
+        const editButton = document.createElement("a");
+        editButton.href = `/articles/${article.id}/edit`;
+        editButton.className = "bg-green-500 text-white px-2 py-1 rounded hover:bg-green-700 mr-2";
+        editButton.textContent = "Edit";
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700";
+        deleteButton.textContent = "Delete";
+        deleteButton.onclick = () => deleteArticle(article.id);
+
+        actionsCell.appendChild(editButton);
+        actionsCell.appendChild(deleteButton);
+
         row.appendChild(titleCell);
         row.appendChild(linkCell);
+        row.appendChild(actionsCell);
+
         articlesTbody.appendChild(row);
     });
 }
 
-// Fetch articles on page load
+async function deleteArticle(articleId) {
+    try {
+        const response = await fetch(`http://localhost:8000/articles/${articleId}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to delete article");
+        }
+
+        alert("Article deleted successfully!");
+        fetchArticles();
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to delete the article");
+    }
+}
+
 window.onload = fetchArticles;

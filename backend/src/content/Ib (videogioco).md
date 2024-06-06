@@ -54,8 +54,10 @@ Indice
 *   [6 Voci correlate](#Voci_correlate)
 *   [7 Collegamenti esterni](#Collegamenti_esterni)
 
-Trama\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=1 "Modifica la sezione Trama") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=1 "Edit section's source code: Trama")\]
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Trama
+-----
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=1 "Modifica la sezione Trama") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=1 "Edit section's source code: Trama")\]
 
 Protagonista del gioco è Ib, una bambina di 9 anni che un giorno, assieme ai suoi genitori, va a visitare una [mostra d'arte](/wiki/Mostra "Mostra") di un misterioso artista di nome Weiss Guertena; quando però ella si trova a fissare un grande quadro chiamato _Fabricated World_ (Mondo Fabbricato), nota che tutti i visitatori sono spariti e si ritrova quindi a vagare per i corridoi desolati e bui. Tornata nella stanza del grande quadro, compaiono sulle pareti e sul pavimento delle scritte che invitano Ib «a venire a scoprire tanti luoghi segreti», e così la bambina, tuffandosi in un grande [affresco](/wiki/Affresco "Affresco") raffigurante un mostro marino, presente nella stanza centrale della galleria, si ritrova in un misterioso corridoio, alla destra del quale trova un vaso con dentro una rosa rossa; non appena Ib la raccoglie, la rosa instaura un legame con la sua anima (quindi se durante il gioco ella perderà tutti i suoi 5 petali, automaticamente anche la bambina perderà la vita arrivando al game over del gioco). In seguito la protagonista si imbatte in un individuo che riversa al suolo quasi esanime. Ib lo soccorre consegnandogli una [rosa blu](/wiki/Rosa_blu "Rosa blu"); egli, preso il fiore e automaticamente ripresosi, si presenta: si chiama Garry, un giovane di età sconosciuta (tra i 18 e i 23 anni) dai capelli viola che le rivela di essere anche lui un visitatore della galleria e che si è ritrovato d'improvviso in quel misterioso luogo. Anche la sua salute è legata alla rosa blu che gli era stata rubata e privata di quasi tutti i suoi petali da un quadro di una donna che ha ripreso vita.
 
@@ -65,8 +67,10 @@ Successivamente si imbattono in Mary, una bambina di 9 anni dai capelli biondi c
 
 Giunti in un misterioso mondo disegnato con pastelli a cera, trovano la stanza dove è affisso il quadro di Mary; quest'ultima accorre lì e poiché furiosa, tenta di ucciderli. I due decidono di bruciare con l'accendino di Garry il dipinto della bambina, così ella diviene un cumulo di cenere. Tale epilogo si rivelerà ancor più triste e duro nei confronti di Mary quando, leggendo un diario poco lontano dal quadro, si verrà a scoprire del dolore e della solitudine della giovane, che ha alimentato in lei la disperazione e il desiderio di poter andare nel mondo reale e vivere tutte le esperienze di una vera vita. Infine Ib e Garry tornano nella galleria e, giungendo di nuovo nella stanza del _Fabricated World_, essi ci saltano dentro e tornano nel mondo reale.
 
-Finali\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=2 "Modifica la sezione Finali") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=2 "Edit section's source code: Finali")\]
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Finali
+------
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=2 "Modifica la sezione Finali") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=2 "Edit section's source code: Finali")\]
 
 [![Da aggiornare](//upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Orologio_arancio.svg/45px-Orologio_arancio.svg.png)](/wiki/File:Orologio_arancio.svg "Da aggiornare")
 
@@ -91,15 +95,21 @@ Sembra infatti che questa voce contenga informazioni superate e/o obsolete. Se p
 3.  Al posto di _Forever Together_: In tale finale sarà semplicemente Ib a decidere di non saltare nel quadro, e nessun miraggio tenterà di farla desistere.
 4.  Un altro _Ib All Alone_ è ottenibile se Ib dorme sul grande letto nero nel _New Dungeon_. Sognerà la sua festa di compleanno, e a intervalli potrà decidere di svegliarsi scoprendo che la sua rosa ha perso dei petali, se invece va avanti fino a quando la madre le dà la buonanotte, cadrà in un sonno eterno. Tuttavia, se Garry è vivo, impedirà a Ib di dormirci sopra.
 
-Modalità di gioco\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=3 "Modifica la sezione Modalità di gioco") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=3 "Edit section's source code: Modalità di gioco")\]
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Modalità di gioco
+-----------------
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=3 "Modifica la sezione Modalità di gioco") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=3 "Edit section's source code: Modalità di gioco")\]
 
 [![Sezione vuota](//upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Quill-Nuvola.svg/20px-Quill-Nuvola.svg.png)](/wiki/File:Quill-Nuvola.svg "Sezione vuota")**Questa sezione sull'argomento videogiochi è ancora vuota**. [Aiutaci](https://it.wikipedia.org/w/index.php?title=Ib_\(videogioco\)&action=edit) a scriverla!
 
-Accoglienza\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=4 "Modifica la sezione Accoglienza") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=4 "Edit section's source code: Accoglienza")\]
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Accoglienza
+-----------
 
-### Critica\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=5 "Modifica la sezione Critica") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=5 "Edit section's source code: Critica")\]
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=4 "Modifica la sezione Accoglienza") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=4 "Edit section's source code: Accoglienza")\]
+
+### Critica
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=5 "Modifica la sezione Critica") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=5 "Edit section's source code: Critica")\]
 
 Alla sua uscita _[freeware](/wiki/Freeware "Freeware")_, Ib ha catturato subito l'attenzione in patria, con l'autore che è stato intervistato da [Famitsū](/wiki/Famits%C5%AB "Famitsū") per il successo del suo gioco[\[5\]](#cite_note-5). Al contrario, è stato ignorato dalla critica specializzata occidentale ma è stato particolarmente apprezzato sul [web](/wiki/Web "Web"), tanto che ha ricevuto traduzioni amatoriali in diverse lingue, fra cui l'inglese nello stesso anno di pubblicazione dell'originale[\[6\]](#cite_note-6) e l'italiano[\[7\]](#cite_note-:0-7), e diventando un cult online, superando i 1,150,000 download in Giappone a fine 2014, con un numero equivalente per la versione inglese[\[8\]](#cite_note-8). In seguito alla sua rinomata e mantenuta popolarità [\[9\]](#cite_note-9)[\[10\]](#cite_note-:3-10), il gioco è stato analizzato anche con un'occhiata critico, venendo apprezzato soprattutto per la sua atmosfera e colonna sonora[\[7\]](#cite_note-:0-7)[\[10\]](#cite_note-:3-10).
 
@@ -107,12 +117,16 @@ Nel 2021, i diritti di una distribuzione remake del gioco sono stati acquistati 
 
 La versione per Nintendo Switch ha una media di 86 su [Metacritic](/wiki/Metacritic "Metacritic"), dove viene generalmente lodato per la grafica, l'aumentata accessibilità grazie alla localizzazione in più lingue e l'atmosfera cupa e inquietante[\[12\]](#cite_note-12). Sul numero Famitsū 1787, questa versione ha ricevuto un punteggio di 30/40[\[13\]](#cite_note-13), mentre al numero seguente gli è stata dedicata la copertina[\[14\]](#cite_note-14).
 
-### Seguito non ufficiale\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=6 "Modifica la sezione Seguito non ufficiale") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=6 "Edit section's source code: Seguito non ufficiale")\]
+### Seguito non ufficiale
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=6 "Modifica la sezione Seguito non ufficiale") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=6 "Edit section's source code: Seguito non ufficiale")\]
 
 In seguito, è stata prodotta anche una versione non ufficiale del gioco creata da un fan del titolo _Ib: Green Edition_. Essa segue la storia e tutte le vicende del titolo originale, con la sola differenza data dall'aggiunta di un altro finale alternativo ai molteplici già presenti. Tale versione del gioco ha suscitato numerose controversie e contrasti tra i fan del titolo, che hanno coinvolto anche lo stesso Kouri che, una volta venuto a conoscenza dell'esistenza di tale versione, ne ha chiesto la cancellazione, portando all'eliminazione di molti link e file della Green Edition in giro per Internet.
 
-Note\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=7 "Modifica la sezione Note") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=7 "Edit section's source code: Note")\]
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note
+----
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=7 "Modifica la sezione Note") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=7 "Edit section's source code: Note")\]
 
 1.  [**^**](#cite_ref-1) (EN) Keiichi Yokoyama, [Ib, a popular Japanese horror game, is getting a remake with updated graphics and gameplay](https://automaton-media.com/en/news/20211004-3421/), su AUTOMATON WEST, 4 ottobre 2021. URL consultato il 31 marzo 2023.
 2.  **^** _[a](#cite_ref-:1_2-0)_ _[b](#cite_ref-:1_2-1)_ (EN) [Ib remake launches April 11 in Japanese](https://www.gematsu.com/2022/04/ib-remake-launches-april-11-in-japanese), su Gematsu, 4 aprile 2022. URL consultato il 31 marzo 2023.
@@ -129,8 +143,10 @@ Note\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=7 "M
 13.  [**^**](#cite_ref-13) (EN) [Famitsu Review Scores: Issue 1787](https://www.gematsu.com/2023/02/famitsu-review-scores-issue-1787), su Gematsu, 1º marzo 2023. URL consultato il 2 aprile 2023.
 14.  [**^**](#cite_ref-14) (EN) Soul Kiwami, [Ib Remake Featured on the March 23 Issue of Famitsu](https://finalweapon.net/2023/03/05/ib-remake-featured-on-the-march-23-issue-of-famitsu/), su Final Weapon, 6 marzo 2023. URL consultato il 2 aprile 2023.
 
-Voci correlate\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=8 "Modifica la sezione Voci correlate") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=8 "Edit section's source code: Voci correlate")\]
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Voci correlate
+--------------
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=8 "Modifica la sezione Voci correlate") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=8 "Edit section's source code: Voci correlate")\]
 
 *   [The Witch's House](/wiki/The_Witch%27s_House "The Witch's House")
 *   [Mad Father](/wiki/Mad_Father "Mad Father")
@@ -139,8 +155,10 @@ Voci correlate\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&se
 *   [Cloé's Requiem](/wiki/Clo%C3%A9%27s_Requiem "Cloé's Requiem")
 *   [Ao Oni](/wiki/Ao_Oni "Ao Oni")
 
-Collegamenti esterni\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=9 "Modifica la sezione Collegamenti esterni") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=9 "Edit section's source code: Collegamenti esterni")\]
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Collegamenti esterni
+--------------------
+
+\[[modifica](/w/index.php?title=Ib_\(videogioco\)&veaction=edit&section=9 "Modifica la sezione Collegamenti esterni") | [modifica wikitesto](/w/index.php?title=Ib_\(videogioco\)&action=edit&section=9 "Edit section's source code: Collegamenti esterni")\]
 
 *   (JA) [Sito ufficiale](http://kouri.kuchinawa.com/game_01.html), su kouri.kuchinawa.com. [![Modifica su Wikidata](//upload.wikimedia.org/wikipedia/commons/thumb/7/73/Blue_pencil.svg/10px-Blue_pencil.svg.png)](https://www.wikidata.org/wiki/Q16564568#P856 "Modifica su Wikidata")
 *   (JA) [Pagina ufficiale del gioco](http://kouri.kuchinawa.com/game_01.html), su kouri.kuchinawa.com.

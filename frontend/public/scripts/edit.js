@@ -2,13 +2,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const articleId = document.querySelector("#article-id").value;
 
     try {
+        console.log(`Fetching article details for ID: ${articleId}`);
         const response = await fetch(`http://localhost:8000/articles/${articleId}`);
-        
+
         if (!response.ok) {
-            throw new Error("Failed to fetch article details");
+            throw new Error(`Failed to fetch article details. Status: ${response.status}`);
         }
 
-        const { content } = await response.json();
+        const { article, content } = await response.json();
 
         const simplemde = new SimpleMDE({
             element: document.getElementById("editor"),
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         async function saveArticle() {
             const updatedContent = simplemde.value();
 
-            const response = await fetch(`http://localhost:8000/articles/${articleId}`, {
+            const saveResponse = await fetch(`http://localhost:8000/articles/${articleId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 body: JSON.stringify({ content: updatedContent }),
             });
 
-            if (response.ok) {
+            if (saveResponse.ok) {
                 console.log("Article saved successfully!");
             } else {
                 console.error("Failed to save article.");
