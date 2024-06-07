@@ -1,6 +1,7 @@
 import {
     searchWikipedia,
     wikipediaToMarkdown,
+    getRandomWikipediaPage,
 } from "../services/wikipedia.service.js";
 import prisma from "../../db/prisma.js";
 import fs from "fs";
@@ -25,6 +26,31 @@ export default function wikipediaRouting(app) {
             res.json(results);
         } catch (error) {
             res.status(500).json({ error: "Error searching Wikipedia" });
+        }
+    });
+
+    // Fetch a random article and save it
+    app.post("/wikipedia/random-article", isLoggedIn, async (req, res) => {
+        try {
+            const { title, content } = await getRandomWikipediaPage();
+
+            const filePath = path.join(__dirname, "../content", `${title}.md`);
+            fs.writeFileSync(filePath, content, "utf8");
+
+            const wikiLink = `https://it.wikipedia.org/wiki/${encodeURIComponent(title)}`;
+
+            const newPage = await prisma.wikipediaPage.create({
+                data: {
+                    title: title,
+                    filePath: filePath,
+                    link: wikiLink,
+                },
+            });
+
+            res.status(201).json(newPage);
+        } catch (error) {
+            console.error("Error fetching random article:", error);
+            res.status(500).json({ error: "Error fetching random article" });
         }
     });
 

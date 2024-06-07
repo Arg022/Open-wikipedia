@@ -21,3 +21,13 @@ export async function wikipediaToMarkdown(pageTitle) {
     const markdownContent = turndownService.turndown(htmlContent);
     return markdownContent;
 }
+
+export async function getRandomWikipediaPage() {
+    const response = await fetch(
+        `https://it.wikipedia.org/w/api.php?action=query&list=random&rnnamespace=0&rnlimit=1&format=json`
+    );
+    const data = await response.json();
+    const randomTitle = data.query.random[0].title;
+    const markdownContent = await wikipediaToMarkdown(randomTitle);
+    return { title: randomTitle, content: markdownContent };
+}

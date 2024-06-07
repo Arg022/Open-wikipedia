@@ -15,6 +15,8 @@
             <input id="query" type="text" placeholder="Search Wikipedia..."
                 class="rounded-lg p-2 border border-gray-300 focus:outline-none focus:border-blue-500 flex-grow mr-4">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Search</button>
+            <button type="button" id="lucky-button"
+                class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700 ml-4">Mi sento fortunato</button>
         </form>
 
         <div id="results" class="mb-8"></div>
@@ -32,7 +34,6 @@
                 <tbody id="articles-tbody"></tbody>
             </table>
         </div>
-
     </div>
 
     <dialog id="overwriteModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center modal">

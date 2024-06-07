@@ -23,6 +23,27 @@ document.getElementById("search-form").addEventListener("submit", async (event) 
     }
 });
 
+document.getElementById("lucky-button").addEventListener("click", async () => {
+    try {
+        const response = await fetch("http://localhost:8000/random-article", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Error fetching random article");
+        }
+
+        const data = await response.json();
+        await saveArticle(data.title);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+});
+
 function displayResults(results) {
     const resultsContainer = document.getElementById("results");
     resultsContainer.innerHTML = "";
@@ -145,6 +166,7 @@ function displayArticles(articles) {
     const articlesTbody = document.getElementById("articles-tbody");
     articlesTbody.innerHTML = "";
 
+    articles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     articles.forEach((article) => {
         const row = document.createElement("tr");
 
