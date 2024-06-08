@@ -8,7 +8,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 //index + search function
-app.get("/home", (req, res) => {
+app.get("/inedx", (req, res) => {
     res.render("pages/search");
 });
 

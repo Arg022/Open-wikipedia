@@ -22,10 +22,9 @@ loginForm.addEventListener("submit", async (e) => {
     }
 
     const data = await res.json();
-    console.log(data);
 
     localStorage.setItem("user", JSON.stringify(data.user));
     localStorage.setItem("token", data.token);
 
-    window.location.href = "/home";
+    window.location.href = "/index";
 });

@@ -13,16 +13,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 .map(
                     (article) => `
         <tr>
-          <td class="px-4 py-3 text-sm font-medium">
+            <td class="px-4 py-3 text-sm font-medium">
             <h2>${article.title}</h2>
-          </td>
-          <td class="px-4 py-3 text-sm font-normal">
+            </td>
+            <td class="px-4 py-3 text-sm font-normal">
             ${new Date(article.createdAt).toLocaleDateString()}
-          </td>
-          <td class="px-4 py-3 text-sm font-normal">
+            </td>
+            <td class="px-4 py-3 text-sm font-normal">
             ${new Date(article.updatedAt).toLocaleDateString() || "-"}
-          </td>
-          <td class="px-4 py-3 text-sm font-normal text-end">
+            </td>
+            <td class="px-4 py-3 text-sm font-normal text-end">
             <a href="/articles/${
                 article.id
             }/edit" class="btn btn-primary btn-sm mr-2">Edit</a>
@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             <a href="${
                 article.link
             }" target="_blank" class="btn btn-link btn-sm">View</a>
-          </td>
+            </td>
         </tr>
-      `
+        `
                 )
                 .join("");
         } catch (error) {
