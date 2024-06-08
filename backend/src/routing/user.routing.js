@@ -68,7 +68,7 @@ export default function userRouting(app) {
                 data: {
                     name,
                     email,
-                    password, // Storing password in plain text (not recommended)
+                    password, 
                 },
             });
 
