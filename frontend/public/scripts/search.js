@@ -25,8 +25,8 @@ document.getElementById("search-form").addEventListener("submit", async (event) 
 
 document.getElementById("lucky-button").addEventListener("click", async () => {
     try {
-        const response = await fetch("http://localhost:8000/random-article", {
-            method: "GET",
+        const response = await fetch("http://localhost:8000/wikipedia/random-article", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("token"),
@@ -38,9 +38,11 @@ document.getElementById("lucky-button").addEventListener("click", async () => {
         }
 
         const data = await response.json();
-        await saveArticle(data.title);
+        alert(`Random article "${data.title}" saved successfully!`);
+        fetchArticles(); // Fetch and update the articles table
     } catch (error) {
         console.error("Error:", error);
+        alert("Failed to fetch and save random article");
     }
 });
 
@@ -166,7 +168,9 @@ function displayArticles(articles) {
     const articlesTbody = document.getElementById("articles-tbody");
     articlesTbody.innerHTML = "";
 
+    // Ordina gli articoli dal più recente al più vecchio
     articles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
     articles.forEach((article) => {
         const row = document.createElement("tr");
 

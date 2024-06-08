@@ -67,6 +67,11 @@ app.get("/login", (req, res) => {
     res.render("pages/login");
 });
 
+// Create user
+app.get("/create-users", (req, res) => {
+    res.render("pages/creation");
+});
+
 app.listen(3000, () => {
     console.log("Frontend listening on port 3000");
 });

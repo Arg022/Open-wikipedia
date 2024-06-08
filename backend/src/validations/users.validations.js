@@ -25,7 +25,7 @@ export function createUserValidation(req, res, next) {
             email: {
                 email: true,
                 userExists: {
-                    id: +req.params.id,
+                    id: req.params.id,
                 },
             },
             password: {

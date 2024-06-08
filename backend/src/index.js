@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import authRouting from "./routing/auth.routing.js";
+import userRouting from "./routing/user.routing.js";
 import wikipediaRouting from "./routing/wikipedia.routing.js";
 import cors from "cors";
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 authRouting(app);
 wikipediaRouting(app);
+userRouting(app);
 
 app.listen(process.env.PORT, () => {
     console.log("Application listening at 8000");
