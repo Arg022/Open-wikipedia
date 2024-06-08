@@ -50,9 +50,9 @@ Il frontend è implementato con Express e utilizza EJS come motore di template p
 
 #### Pagine Principali
 
-1. **Home**
+1. **Index**
 
-   - Percorso: `/home`
+   - Percorso: `/index`
    - Descrizione: Mostra la pagina di ricerca di Wikipedia e la lista degli articoli salvati.
 
 2. **Login**
