@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 .join("");
         } catch (error) {
             console.error("Errore durante il recupero degli articoli:", error);
-            // Display an error message to the user
             const errorMessageElement = document.createElement("div");
             errorMessageElement.classList.add("alert", "alert-error");
             errorMessageElement.textContent =

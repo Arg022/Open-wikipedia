@@ -21,7 +21,6 @@ document.getElementById("register-form").addEventListener("submit", async (event
 
         const user = await response.json();
         alert(`User ${user.name} registered successfully!`);
-        // Optionally redirect to another page or reset the form
         document.getElementById("register-form").reset();
     } catch (error) {
         console.error("Error:", error);

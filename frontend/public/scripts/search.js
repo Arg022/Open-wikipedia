@@ -168,7 +168,6 @@ function displayArticles(articles) {
     const articlesTbody = document.getElementById("articles-tbody");
     articlesTbody.innerHTML = "";
 
-    // Ordina gli articoli dal più recente al più vecchio
     articles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     articles.forEach((article) => {
@@ -197,7 +196,7 @@ function displayArticles(articles) {
         const deleteButton = document.createElement("button");
         deleteButton.className = "bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700";
         deleteButton.textContent = "Delete";
-        deleteButton.onclick = () => deleteArticle(article.id);
+        deleteButton.onclick = () => confirmDeleteArticle(article.id, article.title);
 
         actionsCell.appendChild(editButton);
         actionsCell.appendChild(deleteButton);
@@ -210,22 +209,36 @@ function displayArticles(articles) {
     });
 }
 
-async function deleteArticle(articleId) {
-    try {
-        const response = await fetch(`http://localhost:8000/articles/${articleId}`, {
-            method: "DELETE",
-        });
+function confirmDeleteArticle(articleId, title) {
+    const modal = document.getElementById("deleteModal");
+    document.getElementById("delete-modal-title").textContent = title;
+    modal.showModal();
 
-        if (!response.ok) {
-            throw new Error("Failed to delete article");
+    const cancelButton = document.getElementById("deleteCancelButton");
+    const confirmButton = document.getElementById("confirmDeleteButton");
+
+    cancelButton.onclick = () => {
+        modal.close();
+    };
+
+    confirmButton.onclick = async () => {
+        modal.close();
+        try {
+            const response = await fetch(`http://localhost:8000/articles/${articleId}`, {
+                method: "DELETE",
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to delete article");
+            }
+
+            alert("Article deleted successfully!");
+            fetchArticles();
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Failed to delete the article");
         }
-
-        alert("Article deleted successfully!");
-        fetchArticles();
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to delete the article");
-    }
+    };
 }
 
 window.onload = fetchArticles;
